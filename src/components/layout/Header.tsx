@@ -48,8 +48,22 @@ export function Header({ onMenuClick }: HeaderProps) {
               <span className="text-sm font-medium text-foreground">
                 {user.nome}
               </span>
-              <span className="text-xs text-muted-foreground">
-                {user.papel === "GESTOR_RH" ? "Gestor RH" : "Colaborador"}
+              <span className="text-xs">
+                <span
+                  className={`inline-block rounded-full px-2 py-0.5 text-xs font-medium ${
+                    user.papel === "ADMIN"
+                      ? "bg-destructive/10 text-destructive"
+                      : user.papel === "GESTOR_RH"
+                      ? "bg-primary/10 text-primary"
+                      : "bg-secondary/50 text-secondary-foreground"
+                  }`}
+                >
+                  {user.papel === "GESTOR_RH"
+                    ? "Gestor RH"
+                    : user.papel === "ADMIN"
+                    ? "Admin"
+                    : "Colaborador"}
+                </span>
               </span>
             </div>
             <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-sm font-semibold text-primary-foreground">

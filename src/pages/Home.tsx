@@ -27,8 +27,10 @@ const Home = () => {
           Olá, {user.nome.split(" ")[0]}!
         </h1>
         <p className="mt-1 text-sm text-muted-foreground md:text-base">
-          {user.papel === "GESTOR_RH"
-            ? "Aqui você acompanha colaboradores, benefícios e eventos do portal."
+          {user.papel === "ADMIN"
+            ? "Administre usuários, papéis e acompanhe eventos críticos."
+            : user.papel === "GESTOR_RH"
+            ? "Visualize colaboradores, benefícios e eventos do portal."
             : "Aqui você acompanha seus benefícios, dados e mensagens com o RH."}
         </p>
       </div>
@@ -79,7 +81,7 @@ const Home = () => {
           </CardContent>
         </Card>
 
-        {user.papel === "GESTOR_RH" && (
+{(user.papel === "GESTOR_RH" || user.papel === "ADMIN") && (
           <Card className="transition-shadow hover:shadow-md">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
@@ -105,7 +107,7 @@ const Home = () => {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          {user.papel === "GESTOR_RH" ? (
+          {user.papel === "GESTOR_RH" || user.papel === "ADMIN" ? (
             <div className="space-y-4">
               {recentLogs.map((log) => (
                 <div

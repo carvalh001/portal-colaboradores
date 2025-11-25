@@ -1,4 +1,4 @@
-export type UserRole = "COLABORADOR" | "GESTOR_RH";
+export type UserRole = "COLABORADOR" | "GESTOR_RH" | "ADMIN";
 
 export type UserStatus = "ATIVO" | "INATIVO";
 
@@ -6,6 +6,8 @@ export interface User {
   id: string;
   nome: string;
   email: string;
+  username: string;
+  senha: string;
   cpf: string;
   papel: UserRole;
   telefone: string;

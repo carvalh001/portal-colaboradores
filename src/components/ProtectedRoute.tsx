@@ -1,21 +1,22 @@
 import { Navigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { Layout } from "@/components/layout/Layout";
+import { UserRole } from "@/types";
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
-  adminOnly?: boolean;
+  requiredRoles?: UserRole[];
 }
 
-export function ProtectedRoute({ children, adminOnly = false }: ProtectedRouteProps) {
-  const { user, isAuthenticated } = useAuth();
+export function ProtectedRoute({ children, requiredRoles }: ProtectedRouteProps) {
+  const { user, isAuthenticated, hasAnyRole } = useAuth();
 
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;
   }
 
-  if (adminOnly && user?.papel !== "GESTOR_RH") {
-    return <Navigate to="/home" replace />;
+  if (requiredRoles && requiredRoles.length > 0 && !hasAnyRole(requiredRoles)) {
+    return <Navigate to="/access-denied" replace />;
   }
 
   return <Layout>{children}</Layout>;

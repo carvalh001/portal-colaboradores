@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import Login from "./pages/Login";
+import Register from "./pages/Register";
 import Home from "./pages/Home";
 import Benefits from "./pages/Benefits";
 import MyData from "./pages/MyData";
@@ -13,6 +14,8 @@ import Messages from "./pages/Messages";
 import Employees from "./pages/admin/Employees";
 import EmployeeDetail from "./pages/admin/EmployeeDetail";
 import Logs from "./pages/admin/Logs";
+import Users from "./pages/admin/Users";
+import AccessDenied from "./pages/AccessDenied";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -27,6 +30,8 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Navigate to="/login" replace />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/access-denied" element={<AccessDenied />} />
             <Route
               path="/home"
               element={
@@ -62,7 +67,7 @@ const App = () => (
             <Route
               path="/admin/colaboradores"
               element={
-                <ProtectedRoute adminOnly>
+                <ProtectedRoute requiredRoles={["GESTOR_RH", "ADMIN"]}>
                   <Employees />
                 </ProtectedRoute>
               }
@@ -70,7 +75,7 @@ const App = () => (
             <Route
               path="/admin/colaboradores/:id"
               element={
-                <ProtectedRoute adminOnly>
+                <ProtectedRoute requiredRoles={["GESTOR_RH", "ADMIN"]}>
                   <EmployeeDetail />
                 </ProtectedRoute>
               }
@@ -78,8 +83,16 @@ const App = () => (
             <Route
               path="/admin/logs"
               element={
-                <ProtectedRoute adminOnly>
+                <ProtectedRoute requiredRoles={["GESTOR_RH", "ADMIN"]}>
                   <Logs />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/usuarios"
+              element={
+                <ProtectedRoute requiredRoles={["ADMIN"]}>
+                  <Users />
                 </ProtectedRoute>
               }
             />

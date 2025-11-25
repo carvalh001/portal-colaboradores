@@ -27,13 +27,22 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
     { to: "/mensagens", icon: MessageSquare, label: "Mensagens para RH" },
   ];
 
-  const adminMenuItems =
-    user?.papel === "GESTOR_RH"
-      ? [
-          { to: "/admin/colaboradores", icon: Users, label: "Colaboradores" },
-          { to: "/admin/logs", icon: FileText, label: "Logs" },
-        ]
-      : [];
+  const adminMenuItems: Array<{ to: string; icon: any; label: string }> = [];
+  
+  if (user?.papel === "GESTOR_RH" || user?.papel === "ADMIN") {
+    adminMenuItems.push(
+      { to: "/admin/colaboradores", icon: Users, label: "Colaboradores" },
+      { to: "/admin/logs", icon: FileText, label: "Logs" }
+    );
+  }
+  
+  if (user?.papel === "ADMIN") {
+    adminMenuItems.push({
+      to: "/admin/usuarios",
+      icon: Users,
+      label: "Usuários & Papéis",
+    });
+  }
 
   return (
     <>
