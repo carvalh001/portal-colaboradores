@@ -10,6 +10,7 @@ Crie este arquivo na raiz do projeto:
 
 ```bash
 # Backend API URL - Local
+# Pode usar VITE_API_BASE_URL ou VITE_API_URL (ambos funcionam)
 VITE_API_BASE_URL=http://localhost:8000/api
 
 # Server Configuration (opcional - valores padrão são bons para dev)

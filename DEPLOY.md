@@ -12,7 +12,9 @@ HOST=0.0.0.0
 ALLOWED_HOSTS=lab.assert.com.br
 ```
 
-**❌ NÃO é necessário adicionar:** `ENVIRONMENT=production`
+**📝 IMPORTANTE:** 
+- A variável pode se chamar `VITE_API_BASE_URL` ou `VITE_API_URL` (ambos funcionam)
+- **NÃO** é necessário adicionar `ENVIRONMENT=production`
 
 ---
 
@@ -55,6 +57,15 @@ O arquivo `railway.json` está configurado para:
 
 **Causa**: Variável `ALLOWED_HOSTS` não configurada ou incorreta  
 **Solução**: Adicionar `ALLOWED_HOSTS=lab.assert.com.br` no Railway
+
+### 4. Erro: CORS ao fazer login/requisições (chama localhost:8000)
+
+**Causa**: Variável `VITE_API_BASE_URL` ou `VITE_API_URL` não configurada  
+**Solução**: 
+- Verificar se a variável está no Railway
+- Nome correto: `VITE_API_BASE_URL` ou `VITE_API_URL`
+- Valor: `https://lab-backend.assert.com.br/api`
+- Fazer redeploy após adicionar/corrigir
 
 ---
 

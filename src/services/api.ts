@@ -1,5 +1,10 @@
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+const API_URL = import.meta.env.VITE_API_BASE_URL || import.meta.env.VITE_API_URL || 'http://localhost:8000';
 const API_TIMEOUT = parseInt(import.meta.env.VITE_API_TIMEOUT || '30000');
+
+// Log da URL da API (apenas em dev para debug)
+if (import.meta.env.DEV) {
+  console.log('🔗 API URL:', API_URL);
+}
 
 export interface ApiError {
   message: string;
