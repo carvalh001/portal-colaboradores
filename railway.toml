@@ -1,0 +1,11 @@
+# Railway - Portal Colaboradores (Frontend)
+# https://docs.railway.app/reference/config-as-code
+
+[build]
+builder = "NIXPACKS"
+buildCommand = "npm ci && npm run build"
+
+[deploy]
+startCommand = "npm run start"
+# Servir SPA: todas as rotas redirecionam para index.html
+# A variável VITE_API_BASE_URL deve apontar para a URL do backend no Railway
