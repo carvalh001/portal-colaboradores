@@ -1,11 +1,11 @@
 # Railway - Portal Colaboradores (Frontend)
 # https://docs.railway.app/reference/config-as-code
+# Build via Dockerfile (evita EBUSY do Nixpacks com npm ci + cache mount em node_modules)
 
 [build]
-builder = "NIXPACKS"
-buildCommand = "npm ci && npm run build"
+builder = "DOCKERFILE"
+dockerfilePath = "Dockerfile"
 
 [deploy]
-startCommand = "npm run start"
-# Servir SPA: todas as rotas redirecionam para index.html
-# A variável VITE_API_BASE_URL deve apontar para a URL do backend no Railway
+# Comando de start definido no CMD do Dockerfile (serve -s dist -l $PORT)
+# Variável VITE_API_BASE_URL deve apontar para a URL do backend no Railway (embutida no build)
