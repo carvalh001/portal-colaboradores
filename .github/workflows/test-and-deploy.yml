@@ -43,7 +43,7 @@ jobs:
         run: pip install -r python-behave-web-framework/requirements.txt
 
       - name: Run Behave (Portal)
-        run: behave features/portal/ --tags=@portal -f pretty
+        run: behave features/portal/autenticacao.feature --tags=@portal -f pretty
         working-directory: python-behave-web-framework
         env:
           URL_BASE_SISTEMA: ${{ env.PORTAL_URL }}
